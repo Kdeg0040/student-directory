@@ -29,6 +29,14 @@ def print(students)
   end
 end
 
+def print_starting_with(letter, students)
+  students.each do |student|
+    if student[:name].chr == letter
+      puts student[:name]
+    end
+  end
+end
+
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
@@ -36,5 +44,5 @@ end
 students = input_students
 #nothing happens until we call the methods
 print_header
-print(students)
+print_starting_with("N", students)
 print_footer(students)
