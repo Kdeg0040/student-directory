@@ -19,17 +19,18 @@ def input_students
 end
 
 def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
+  puts "The students of Villains Academy".center(40)
+  puts "-------------".center(40)
 end
 
 def print(students)
   index = 0
   while index < students.size
-    puts "#{index + 1}. #{students[index][:name]} (#{students[index][:cohort]} cohort)"
-    puts "hobbies: #{students[index][:hobbies]}"
-    puts "country of birth: #{students[index][:birth_country]}"
-    puts "height(cm): #{students[index][:height]}"
+    puts "#{index + 1}. #{students[index][:name]} (#{students[index][:cohort]} cohort)".center(40)
+    puts "hobbies: #{students[index][:hobbies]}".center(40)
+    puts "country of birth: #{students[index][:birth_country]}".center(40)
+    puts "height(cm): #{students[index][:height]}".center(40)
+    puts ""
     index += 1
   end
 end
