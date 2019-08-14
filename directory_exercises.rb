@@ -67,6 +67,25 @@ def print_shorter_than(num, students)
   end
 end
 
+def print_by_cohort(students)
+  list = []
+  students.each {|i| list << i[:cohort]}
+
+  index = 1
+  list.sort.uniq!.each do |x|
+    students.each do |i|
+      if x == i[:cohort]
+        puts "#{index}. #{i[:name]} (#{i[:cohort]} cohort)".center(40)
+        puts "hobbies: #{i[:hobbies]}".center(40)
+        puts "country of birth: #{i[:birth_country]}".center(40)
+        puts "height(cm): #{i[:height]}".center(40)
+        puts ""
+        index += 1
+      end
+    end
+  end
+end
+
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
@@ -74,5 +93,5 @@ end
 students = input_students
 #nothing happens until we call the methods
 print_header
-print(students)
+print_by_cohort(students)
 print_footer(students)
