@@ -87,11 +87,15 @@ def print_by_cohort(students)
 end
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
+  if students.count == 1
+    puts "Overall, we have #{students.count} great student".center(40)
+  else
+    puts "Overall, we have #{students.count} great students".center(40)
+  end
 end
 
 students = input_students
 #nothing happens until we call the methods
 print_header
-print_by_cohort(students)
+print(students)
 print_footer(students)
