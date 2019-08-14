@@ -94,8 +94,14 @@ def print_footer(students)
   end
 end
 
-students = input_students
-#nothing happens until we call the methods
-print_header
-print(students)
-print_footer(students)
+def run_directory
+  students = input_students
+  #nothing happens until we call the methods
+  if students.size > 0
+    print_header
+    print(students)
+    print_footer(students)
+  end
+end
+
+run_directory
