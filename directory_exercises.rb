@@ -34,18 +34,22 @@ def input_students
   students
 end
 
+def puts_center(text)
+  puts text.center(40)
+end
+
 def print_header
-  puts "The students of Villains Academy".center(40)
-  puts "-------------".center(40)
+  puts_center("The students of Villains Academy")
+  puts_center("-------------")
 end
 
 def print(students)
   index = 0
   while index < students.size
-    puts "#{index + 1}. #{students[index][:name]} (#{students[index][:cohort]} cohort)".center(40)
-    puts "hobbies: #{students[index][:hobbies]}".center(40)
-    puts "country of birth: #{students[index][:birth_country]}".center(40)
-    puts "height(cm): #{students[index][:height]}".center(40)
+    puts_center("#{index + 1}. #{students[index][:name]} (#{students[index][:cohort]} cohort)")
+    puts_center("hobbies: #{students[index][:hobbies]}")
+    puts_center("country of birth: #{students[index][:birth_country]}")
+    puts_center("height(cm): #{students[index][:height]}")
     puts ""
     index += 1
   end
@@ -75,10 +79,10 @@ def print_by_cohort(students)
   list.sort.uniq!.each do |x|
     students.each do |i|
       if x == i[:cohort]
-        puts "#{index}. #{i[:name]} (#{i[:cohort]} cohort)".center(40)
-        puts "hobbies: #{i[:hobbies]}".center(40)
-        puts "country of birth: #{i[:birth_country]}".center(40)
-        puts "height(cm): #{i[:height]}".center(40)
+        puts_center("#{index}. #{i[:name]} (#{i[:cohort]} cohort)")
+        puts_center("hobbies: #{i[:hobbies]}")
+        puts_center("country of birth: #{i[:birth_country]}")
+        puts_center("height(cm): #{i[:height]}")
         puts ""
         index += 1
       end
@@ -88,9 +92,9 @@ end
 
 def print_footer(students)
   if students.count == 1
-    puts "Overall, we have #{students.count} great student".center(40)
+    puts_center("Overall, we have #{students.count} great student")
   else
-    puts "Overall, we have #{students.count} great students".center(40)
+    puts_center("Overall, we have #{students.count} great students")
   end
 end
 
