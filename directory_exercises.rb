@@ -5,7 +5,7 @@ def input_students
   # creates an empty array
   students = []
   # get the first names
-  name = gets.chomp
+  name = gets.sub(/\n/, "")
   # while the name is not empty, repeat this code
   while !name.empty? do
     puts "Cohort: "
