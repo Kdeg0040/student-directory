@@ -1,9 +1,9 @@
+
+@students = [] # an empty array accessible to all methods
 # let's put all students into an array
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
-  # creates an empty array
-  students = []
   # get the first names
   name = gets.sub(/\n/, "")
   # while the name is not empty, repeat this code
@@ -25,13 +25,45 @@ def input_students
     height = "---" if height.empty?
 
     # add the student hash to the array
-    students << {name: name, cohort: cohort, hobbies: hobbies, birth_country: birth_country, height: height}
-    puts "Now we have #{students.count} students"
+    @students << {name: name, cohort: cohort, hobbies: hobbies, birth_country: birth_country, height: height}
+    puts "Now we have #{@students.count} students"
     # get another name from the user
     name = gets.chomp
   end
   # return the array of students
-  students
+  @students
+end
+
+def interactive_menu
+  loop do
+    print_menu
+    process(gets.chomp)
+  end
+end
+
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit" # 9 because we'll be adding more items
+end
+
+def show_students
+  print_header
+  print
+  print_footer
+end
+
+def process(selection)
+  case selection
+  when "1"
+    input_students
+  when "2"
+    show_students
+  when "9"
+    exit
+  else
+    puts "I don't know what you mean, try again"
+  end
 end
 
 def puts_center(text)
@@ -43,41 +75,41 @@ def print_header
   puts_center("-------------")
 end
 
-def print(students)
+def print
   index = 0
-  while index < students.size
-    puts_center("#{index + 1}. #{students[index][:name]} (#{students[index][:cohort]} cohort)")
-    puts_center("hobbies: #{students[index][:hobbies]}")
-    puts_center("country of birth: #{students[index][:birth_country]}")
-    puts_center("height(cm): #{students[index][:height]}")
+  while index < @students.size
+    puts_center("#{index + 1}. #{@students[index][:name]} (#{@students[index][:cohort]} cohort)")
+    puts_center("hobbies: #{@students[index][:hobbies]}")
+    puts_center("country of birth: #{@students[index][:birth_country]}")
+    puts_center("height(cm): #{@students[index][:height]}")
     puts ""
     index += 1
   end
 end
 
-def print_starting_with(letter, students)
-  students.each do |student|
+def print_starting_with(letter)
+  @students.each do |student|
     if student[:name].chr == letter
       puts student[:name]
     end
   end
 end
 
-def print_shorter_than(num, students)
-  students.each do |student|
+def print_shorter_than(num)
+  @students.each do |student|
     if student[:name].size < num
       puts student[:name]
     end
   end
 end
 
-def print_by_cohort(students)
+def print_by_cohort
   list = []
-  students.each {|i| list << i[:cohort]}
+  @students.each {|i| list << i[:cohort]}
 
   index = 1
   list.sort.uniq!.each do |x|
-    students.each do |i|
+    @students.each do |i|
       if x == i[:cohort]
         puts_center("#{index}. #{i[:name]} (#{i[:cohort]} cohort)")
         puts_center("hobbies: #{i[:hobbies]}")
@@ -90,21 +122,21 @@ def print_by_cohort(students)
   end
 end
 
-def print_footer(students)
-  if students.count == 1
-    puts_center("Overall, we have #{students.count} great student")
+def print_footer
+  if @students.count == 1
+    puts_center("Overall, we have #{@students.count} great student")
   else
-    puts_center("Overall, we have #{students.count} great students")
+    puts_center("Overall, we have #{@students.count} great students")
   end
 end
 
 def run_directory
-  students = input_students
+  interactive_menu
   #nothing happens until we call the methods
-  if students.size > 0
+  if @students.size > 0
     print_header
-    print(students)
-    print_footer(students)
+    print
+    print_footer
   end
 end
 
