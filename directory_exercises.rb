@@ -30,8 +30,6 @@ def input_students
     # get another name from the user
     name = gets.chomp
   end
-  # return the array of students
-  @students
 end
 
 def interactive_menu
@@ -44,12 +42,13 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
+  puts "3. Save the list to students.csv"
   puts "9. Exit" # 9 because we'll be adding more items
 end
 
 def show_students
   print_header
-  print
+  print_student_list
   print_footer
 end
 
@@ -59,6 +58,8 @@ def process(selection)
     input_students
   when "2"
     show_students
+  when "3"
+    save_students
   when "9"
     exit
   else
@@ -75,7 +76,7 @@ def print_header
   puts_center("-------------")
 end
 
-def print
+def print_student_list
   index = 0
   while index < @students.size
     puts_center("#{index + 1}. #{@students[index][:name]} (#{@students[index][:cohort]} cohort)")
@@ -130,12 +131,24 @@ def print_footer
   end
 end
 
+def save_students
+  # open the file for writing
+  file = File.open("students.csv", "w")
+  # iterate over the array of students
+  @students.each do |student|
+    student_data = [student[:name], student[:cohort], student[:hobbies], student[:height]]
+    csv_line = student_data.join(",")
+    file.puts csv_line
+  end
+  file.close
+end
+
 def run_directory
   interactive_menu
   #nothing happens until we call the methods
   if @students.size > 0
     print_header
-    print
+    print_student_list
     print_footer
   end
 end
